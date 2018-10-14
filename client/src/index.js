@@ -8,12 +8,14 @@ import Registration from './containers/Registration/Registration';
 import AllProducts from './containers/AllProducts/AllProducts';
 import ProductById from './containers/ProductById/ProductById';
 import CreateProduct from './containers/CreateProduct/CreateProduct';
-import Login from './containers/Login/Login'
+import Login from './containers/Login/Login';
+import Main from './containers/Main/Main';
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Switch>
+                <Route exact path='/' component={Main}/>
                 <Route exact path='/registration' component={Registration}/>
                 <Route exact path='/login' component={Login}/>
                 <Route exact path='/product/new' component={CreateProduct}/>

@@ -5,6 +5,7 @@ const config = require('./config');
 const mongoose = require('mongoose');
 const user = require('./Routes/User/index');
 const login = require('./Routes/Login/index');
+const product = require('./Routes/Product/index');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -18,6 +19,7 @@ mongoose.connect(db_url, function(){
 
 app.use(user);
 app.use(login);
+app.use(product);
 
 app.listen(port, function () {
     console.log(`Server listening on port ${port}.`);

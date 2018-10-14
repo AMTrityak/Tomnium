@@ -4,53 +4,68 @@ const User = require('../../Models/userModel');
 const config = require('../../config');
 
 
-exports.postUser = function (req, res){
-    var user = User();
+exports.userRegistration = (req, res) => {
+    let user = User();
     user.username = req.body.username;
-    var password = req.body.password;
+    let password = req.body.password;
     console.log('body', req.body);
     bcrypt.hash(password, null, null, function(err, hash){
         if (err){
-            console.log('errr',err);
+            console.log('err', err);
             res.sendStatus(500)
-
         }
         else {
             user.password = hash;
             user.save()
-                .then(() => {
+                .then((user) => {
+                    console.log('saved user',user)
                     res.sendStatus(201)
                 })
                 .catch((err) => {
-                    console.log('errr',err);
+                    console.log('err',err);
                     res.sendStatus(500)
                 })
-                // function (err) {
-                // if (err) {
-                //     console.log('errr',err);
-                //     res.sendStatus(500)}
-                // else {
-                //     res.sendStatus(201)
-                // }
-            // })
         }
     })
 };
 
-exports.getUser = function (req, res) {
-    if(!req.headers['x-auth']) {
+exports.checkUser = (req, res) => {
+    let auth;
+    if(!req.headers['auth']) {
         return res.sendStatus(401)
     }
     try {
-        var auth = jwt.decode(req.headers['x-auth'], config.secretKey)
-    } catch (err) {
+        auth = jwt.decode(req.headers['auth'], config.secretKey)
+    }
+    catch (err) {
         return res.sendStatus(401)
     }
-    User.findOne({username: auth.username}, function(err, user) {
-        if (err) {return res.sendStatus(500)}
-        else {
+    User.findOne({username: auth.username})
+        .then((user) => {
             res.json(user)
-        }
-    })
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.sendStatus(500)
+        })
 };
 
+exports.getAccount = function(req, res){
+    let username;
+    if (!req.headers['auth']) {
+        return res.sendStatus(401)
+    }
+    try {
+        username = jwt.decode(req.headers['auth'], config.secretKey).username
+    } catch(err) {
+        return res.sendStatus(401)
+    }
+    User.findOne({username: username})
+        .then((user) => {
+            res.json(user)
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.sendStatus(401)
+        })
+};

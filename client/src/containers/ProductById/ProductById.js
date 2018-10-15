@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './productById.css';
 import {FetchProduct} from '../../redux/modules/productById';
 
 const mapStateToProps = store => {
@@ -9,7 +10,6 @@ const mapStateToProps = store => {
     }
 };
 
-
 class ProductById extends Component {
     componentDidMount() {
         const {FetchProduct} = this.props;
@@ -17,12 +17,13 @@ class ProductById extends Component {
         FetchProduct(id);
     }
     render() {
-        if(!this.props.productId.data)
-            return null;
-        else
+        if(!this.props.productId.data) return null;
         return (
-            <div className='products-wrapper'>
-                <p>{this.props.productId.data && this.props.productId.data.name}</p>
+            <div className='product-wrapper'>
+                <h1>Name product: {this.props.productId.data.name}</h1>
+                <p>Price product: {this.props.productId.data.price}</p>
+                <p>Description: {this.props.productId.data.description}</p>
+                <p>Created By: {this.props.productId.data.createdBy}</p>
             </div>
         );
     }

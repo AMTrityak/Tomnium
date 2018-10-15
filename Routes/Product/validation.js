@@ -6,7 +6,7 @@ exports.productValidation = () => {
         const name = req.body.name;
         const price = req.body.price;
         const description = req.body.description;
-        const createBy = req.body.createBy;
+        const createBy = req.body.createdBy;
         if(!name){
             return resHandler(res, 400, true, errorMsg.MissingProductName)
         }

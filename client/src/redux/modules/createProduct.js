@@ -48,10 +48,10 @@ const postCreateFailure = (err) => ({
 });
 
 
-export const postCreateProduct = ({ name, price, description, createBy }) => (dispatch) => {
+export const postCreateProduct = ({ name, price, description, createdBy }) => (dispatch) => {
     dispatch(postCreateRequest());
 
-    return api.postCreateProduct({ name, price, description, createBy })
+    return api.postCreateProduct({ name, price, description, createdBy })
         .then(res => {
             if(res.status === 201) {
                 dispatch(postCreateSuccess(res));

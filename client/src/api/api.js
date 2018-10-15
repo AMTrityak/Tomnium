@@ -30,7 +30,7 @@ const postRegistration = ({ username, password }) => {
     return axios(config)
 };
 
-const postCreateProduct = ({ name, price, description, createBy }) => {
+const postCreateProduct = ({ name, price, description, createdBy }) => {
     const config = {
         method: 'post',
         url: URL_CREATE_PRODUCT,
@@ -38,7 +38,7 @@ const postCreateProduct = ({ name, price, description, createBy }) => {
             name: name,
             price: price,
             description: description,
-            createBy: createBy
+            createdBy: createdBy
         },
         headers: {
             'content-type': 'application/json'

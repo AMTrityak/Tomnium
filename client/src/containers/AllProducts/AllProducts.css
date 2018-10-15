@@ -1,3 +1,9 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #23313c;
+}
+
 .products-wrapper{
     width: 90%;
     height: 100vh;
@@ -14,7 +20,24 @@
     border: 1px solid black;
     margin: 15px;
     box-shadow: 2px 4px 10px black;
+    background-color: #425158;
+    padding: 10px;
+    color: #7d8377;
 }
-h1{
-    text-align: center;
+
+.product-item:hover{
+     background-color: #19b087;
+     color: #fff;
+ }
+
+.product-item:hover > h1{
+    color: #fff;
+}
+
+h1{ text-align: center;
+    color: #7d8377;
+}
+
+a{
+    text-decoration: none;
 }

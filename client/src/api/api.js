@@ -65,8 +65,8 @@ const loginToken =({username, password}) => {
 };
 
 export function setToken(token) {
-    // apiClient.defaults.headers.Authorization = `Bearer ${header}`;
-    localStorage.setItem('authHeader', token)
+    axios.defaults.headers.auth = `${token}`;
+    localStorage.setItem('auth', token)
 }
 
 export default {fetchProducts, fetchProductById, postRegistration, postCreateProduct, loginToken, setToken};

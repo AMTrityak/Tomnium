@@ -31,7 +31,9 @@ class Login extends Component {
     };
     handleClick = (e) => {
         e.preventDefault();
-        this.props.postLogin({ ...this.state })
+        const username = this.state.username;
+        const password = this.state.password;
+        this.props.postLogin({username, password })
     };
 
     render() {

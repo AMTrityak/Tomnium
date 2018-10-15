@@ -43,7 +43,7 @@ class CreateProduct extends Component {
     render() {
         return (
             <div>
-                {localStorage.getItem('authHeader') ?
+                {localStorage.getItem('auth') ?
                 <form>
                     <h1>Create product</h1>
                     <div>

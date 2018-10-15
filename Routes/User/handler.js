@@ -16,6 +16,13 @@ exports.userRegistration = (req, res) => {
         }
         else {
             user.password = hash;
+            User.findOne({username: user.username}).exec(function(err, user){
+                if(err)
+                    return res.send('Error');
+
+                if(user)
+                    return res.send('User already exist');
+            });
             user.save()
                 .then((user) => {
                     console.log('saved user',user)
@@ -50,22 +57,22 @@ exports.checkUser = (req, res) => {
         })
 };
 
-exports.getAccount = function(req, res){
-    let username;
-    if (!req.headers['auth']) {
-        return res.sendStatus(401)
-    }
-    try {
-        username = jwt.decode(req.headers['auth'], config.secretKey).username
-    } catch(err) {
-        return res.sendStatus(401)
-    }
-    User.findOne({username: username})
-        .then((user) => {
-            res.json(user)
-        })
-        .catch((err) => {
-            console.log(err);
-            return res.sendStatus(401)
-        })
-};
+// exports.getAccount = function(req, res){
+//     let username;
+//     if (!req.headers['auth']) {
+//         return res.sendStatus(401)
+//     }
+//     try {
+//         username = jwt.decode(req.headers['auth'], config.secretKey).username
+//     } catch(err) {
+//         return res.sendStatus(401)
+//     }
+//     User.findOne({username: username})
+//         .then((user) => {
+//             res.json(user)
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//             return res.sendStatus(401)
+//         })
+// };
